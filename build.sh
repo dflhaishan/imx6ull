@@ -1,0 +1,72 @@
+#!/bin/bash
+set -eE
+
+
+cmd=$(realpath $0)
+SDK_ROOT_DIR=$(dirname $cmd)
+
+export PATH="${SDK_ROOT_DIR}/tools/toolchain/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin:$PATH"
+
+function msg_info() {
+	echo -e "${C_GREEN}[$(basename $0):info] $1${C_NORMAL}"
+}
+
+function msg_warn() {
+	echo -e "${C_YELLOW}[$(basename $0):warn] $1${C_NORMAL}"
+}
+
+function msg_error() {
+	echo -e "${C_RED}[$(basename $0):error] $1${C_NORMAL}"
+}
+
+function usage() {
+	echo "Usage: build.sh [OPTIONS]"
+	echo "Available options:"
+	echo "uboot              -build uboot"
+	echo ""
+	echo "clean uboot        -clean uboot"
+	exit 0
+}
+
+function build_uboot() {
+	echo "============Start building uboot============"
+	echo "CROSS_COMPILE=arm-linux-gnueabihf-"
+    echo "mx6ull_14x14_ddr512_emmc_defconfig"
+	echo "========================================="
+
+    make -C uboot ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- mx6ull_14x14_ddr512_emmc_defconfig
+    make -C uboot ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc)
+}
+
+function build_clean() {
+	param="${1}"
+	msg_info "clean ${param}"
+	case $param in
+	uboot)
+		make -C uboot ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+		;;
+	*)
+		msg_warn "clean [$1] not support, ignore"
+		;;
+	esac
+}
+
+
+
+num=$#
+option=""
+while [ $# -ne 0 ]; do
+    case $1 in 
+    uboot) option=build_uboot ;;
+	clean)
+		option="build_clean $2"
+		break
+		;;
+    *) option=usage ;;
+	esac
+	if [ $((num)) -gt 0 ]; then
+		shift
+	fi
+done
+
+eval "${option}"
