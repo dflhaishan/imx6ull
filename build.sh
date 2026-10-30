@@ -5,6 +5,16 @@ set -eE
 cmd=$(realpath $0)
 SDK_ROOT_DIR=$(dirname $cmd)
 
+C_BLACK="\e[30;1m"
+C_RED="\e[31;1m"
+C_GREEN="\e[32;1m"
+C_YELLOW="\e[33;1m"
+C_BLUE="\e[34;1m"
+C_PURPLE="\e[35;1m"
+C_CYAN="\e[36;1m"
+C_WHITE="\e[37;1m"
+C_NORMAL="\033[0m"
+
 export PATH="${SDK_ROOT_DIR}/tools/toolchain/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin:$PATH"
 
 function msg_info() {
