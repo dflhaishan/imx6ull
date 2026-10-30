@@ -38,12 +38,25 @@ function build_uboot() {
     make -C uboot ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j$(nproc)
 }
 
+function build_kernel() {
+	echo "============Start building kernel============"
+	echo "CROSS_COMPILE=arm-linux-gnueabihf-"
+    echo "imx_v7_defconfig"
+	echo "========================================="
+
+    make -C kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- imx_v7_defconfig
+    make -C kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- all -j$(nproc)
+}
+
 function build_clean() {
 	param="${1}"
 	msg_info "clean ${param}"
 	case $param in
 	uboot)
 		make -C uboot ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+		;;
+	kernel)
+		make -C kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
 		;;
 	*)
 		msg_warn "clean [$1] not support, ignore"
@@ -58,6 +71,7 @@ option=""
 while [ $# -ne 0 ]; do
     case $1 in 
     uboot) option=build_uboot ;;
+    kernel) option=build_kernel ;;
 	clean)
 		option="build_clean $2"
 		break

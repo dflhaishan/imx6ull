@@ -17,3 +17,4 @@
 1. uboot-imx-2016.03-2.1.0
 
 # kernel
+1. linux-imx-4.1.15
