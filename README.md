@@ -12,3 +12,8 @@
 3. DDR3
     - 512MB
 4. ...
+
+# uboot
+1. uboot-imx-2016.03-2.1.0
+
+# kernel
