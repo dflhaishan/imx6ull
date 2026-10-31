@@ -18,3 +18,6 @@
 
 # kernel
 1. linux-imx-4.1.15
+
+# rootfs
+1. buildroot-2023.02.6
