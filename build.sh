@@ -58,6 +58,13 @@ function build_kernel() {
     make -C kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- all -j$(nproc)
 }
 
+function build_rootfs() {
+	echo "============Start building rootfs============"
+	echo "buildroot"
+	echo "========================================="
+    make -C rootfs ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- rootfs
+}
+
 function build_clean() {
 	param="${1}"
 	msg_info "clean ${param}"
@@ -82,6 +89,7 @@ while [ $# -ne 0 ]; do
     case $1 in 
     uboot) option=build_uboot ;;
     kernel) option=build_kernel ;;
+    rootfs) option=build_rootfs ;;
 	clean)
 		option="build_clean $2"
 		break
