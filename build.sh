@@ -15,7 +15,7 @@ C_CYAN="\e[36;1m"
 C_WHITE="\e[37;1m"
 C_NORMAL="\033[0m"
 
-export PATH="${SDK_ROOT_DIR}/tools/toolchain/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin:$PATH"
+export PATH="${SDK_ROOT_DIR}/tools/toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin:$PATH"
 
 function msg_info() {
 	echo -e "${C_GREEN}[$(basename $0):info] $1${C_NORMAL}"
