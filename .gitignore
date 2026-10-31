@@ -1,2 +1,4 @@
 rootfs/out
 rootfs/buildroot/buildroot-2023.02.6
+tools/toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
+load.imx
