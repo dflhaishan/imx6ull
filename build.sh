@@ -33,8 +33,12 @@ function usage() {
 	echo "Usage: build.sh [OPTIONS]"
 	echo "Available options:"
 	echo "uboot              -build uboot"
+    echo "kernel             -build kernel"
+    echo "rootfs             -build rootfs"
 	echo ""
 	echo "clean uboot        -clean uboot"
+    echo "clean kernel       -clean kernel"
+    echo "clean rootfs       -clean rootfs"
 	exit 0
 }
 
@@ -74,6 +78,9 @@ function build_clean() {
 		;;
 	kernel)
 		make -C kernel ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+		;;
+	rootfs)
+		make -C rootfs ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
 		;;
 	*)
 		msg_warn "clean [$1] not support, ignore"
